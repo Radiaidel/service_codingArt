@@ -1,4 +1,10 @@
-<div class="bg-red-500">
+<div class="flex min-h-screen bg-gray-50">
+  <app-sidebar class="sticky top-0" />
   
-  <h1 class="text-3xl font-bold underline">  Hello world!</h1>
+  <div class="flex-1 flex flex-col">
+      <app-header />
+      <main class="p-6">
+          <router-outlet></router-outlet>
+      </main>
+  </div>
 </div>
