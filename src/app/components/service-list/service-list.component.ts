@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ServiceManagementService } from '../../services/service.service';
 import { Service } from '../../models/service.model';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-service-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, DeleteConfirmationComponent],
 
   templateUrl: './service-list.component.html',
   styleUrl: './service-list.component.css'
@@ -17,6 +18,7 @@ export class ServiceListComponent implements OnInit {
   filteredServices: Service[] = [];
   selectedCategory: string = '';
   selectedStatus: boolean | undefined;
+  showDeleteModal = false;
   serviceToDelete: Service | null = null;
   showCategoryDropdown = false;
   showStatusDropdown = false;
@@ -67,4 +69,23 @@ export class ServiceListComponent implements OnInit {
     this.applyFilters();
   }
 
+  showDeleteConfirmation(service: Service) {
+    this.serviceToDelete = service;
+    this.showDeleteModal = true;
+    this.activeActionMenu = null;
+  }
+
+  confirmDelete() {
+    if (this.serviceToDelete) {
+      this.serviceManagement.deleteService(this.serviceToDelete.id);
+      this.showDeleteModal = false;
+      this.serviceToDelete = null;
+      this.applyFilters();
+    }
+  }
+
+  cancelDelete() {
+    this.showDeleteModal = false;
+    this.serviceToDelete = null;
+  }
 }

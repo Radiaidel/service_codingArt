@@ -109,7 +109,7 @@
                 </button>
                 @if (activeActionMenu === service.id) {
                 <div class="absolute right-0 mt-1 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-20">
-                    <button 
+                    <button (click)="showDeleteConfirmation(service)"
                         class="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-2 text-violet-900 text-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -123,4 +123,12 @@
         </div>
         }
     </div>
+
+    @if (showDeleteModal) {
+    <app-delete-confirmation
+        [service]="serviceToDelete!"
+        (confirm)="confirmDelete()"
+        (cancel)="cancelDelete()">
+    </app-delete-confirmation>
+    }
 </div>
