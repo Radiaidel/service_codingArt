@@ -5,5 +5,5 @@ export interface Service {
     isActive: boolean;
     description?: string;
     price: number;
-    image?: string;
+    image: string | ArrayBuffer | null;
   }

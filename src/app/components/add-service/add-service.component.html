@@ -1,1 +1,116 @@
-<p>add-service works!</p>
+<div class="px-8 py-6">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-violet-900 text-xl font-bold">Ajouter un service</h1>
+        <div class="space-x-3">
+            <button
+                type="submit"
+                [disabled]="!form.form.valid"
+                class="px-14 py-2 bg-violet-900 rounded-full text-white font-semibold">
+                Créer
+            </button>
+            <button
+                type="button"
+                (click)="cancel()"
+                class="px-14 py-2 bg-gray-200 rounded-full text-gray-500 font-semibold">
+                Annuler
+            </button>
+        </div>
+    </div>
+
+        <div class="bg-white rounded-lg p-6 mb-6 ">
+            <h2 class="text-violet-900 mb-6">Détails du service</h2>
+
+            <div class="grid grid-cols-2 gap-6 w-[60%]">
+            <div class="">
+                <div class="px-4">
+                    <label class="block mb-2 text-sm">
+                        Nom de service <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        [(ngModel)]="service.name"
+                        name="name"
+                        required
+                        class="w-full p-2 border-2 border-violet-200 rounded-lg" />
+                </div>
+
+                <div class="col-span-2 px-4 text-sm">
+                    <label class="block mb-2">Description</label>
+                    <textarea
+                        [(ngModel)]="service.description"
+                        name="description"
+                        rows="4"
+                        class="w-full p-2 border-2 border-violet-200 rounded-lg resize-none"></textarea>
+                </div>
+            </div>
+
+
+
+                <div class="px-4 text-sm">
+                    <label class="block mb-2">Photos</label>
+                    <div
+                        class="relative border-2 border-dashed border-violet-300 rounded-lg p-8 cursor-pointer flex items-center justify-center">
+                        <input
+                            type="file"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                            (change)="onFileSelected($event)" />
+
+                        <div class="flex flex-col items-center">
+                            <img *ngIf="image" [src]="image"
+                                class="w-32 h-32 object-cover rounded-lg" />
+
+                            <ng-container *ngIf="!image">
+                                <svg
+                                    class="w-14 h-14 text-violet-400 opacity-40 mb-2"
+                                    fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <p class="text-xs text-gray-500">Déposez le
+                                    fichier ici ou</p>
+                                <p
+                                    class="text-xs text-violet-400">sélectionnez-le
+                                    depuis votre ordinateur</p>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+              
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-6">
+            <h2 class="text-violet-900 mb-6">Détails des prix</h2>
+
+            <div class="grid grid-cols-2 gap-6 w-[60%]">
+                <div class="px-4 text-sm">
+                    <label class="block mb-2">Prix du vent</label>
+                    <input
+                        type="number"
+                        [(ngModel)]="service.price"
+                        name="price"
+                        required
+                        class="w-full p-2 border-2 border-violet-200 rounded-lg" />
+                </div>
+
+                <div class="px-4 text-sm">
+                    <label class="block mb-2">TVA</label>
+                    <select
+                        [(ngModel)]="service.tva"
+                        name="tva"
+                        class="w-full p-2 border-2 border-violet-200 rounded-lg appearance-none bg-white">
+                        <option value="20">20%</option>
+                        <option value="14">14%</option>
+                        <option value="10">10%</option>
+                        <option value="7">7%</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
